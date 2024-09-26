@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
+import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { ReactNode } from "react";
 interface IProps {
   isOpen: boolean;
@@ -13,7 +13,7 @@ const Modal = ({ isOpen, closeModal, title, children }: IProps) => {
         open={isOpen}
         as="div"
         className="relative z-10 focus:outline-none"
-        onClose={close}
+        onClose={closeModal}
       >
         <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-4">
