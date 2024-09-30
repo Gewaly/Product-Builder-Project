@@ -1,17 +1,39 @@
 import ProductCard from "./components/ProductCard";
 import Modal from "./components/ui/Modal";
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 import Button from "./components/ui/Button";
 import { formInputList } from "./components/data/index";
 import Input from "../src/components/ui/Input";
+import { Description } from "@headlessui/react";
+import { IProduct } from "../src/components/interfaces/index";
 const App = () => {
+  //<--STATE-->
+  const [product, setProduct] = useState<IProduct>({
+    title: "",
+    description: "",
+    imageURL: "",
+    price: "",
+    colors: [],
+    category: {
+      name: "",
+      imageURL: "",
+    },
+  });
   const [isOpen, setIsOpen] = useState(false);
+  //<--HANDLER-->
   function openModal() {
     setIsOpen(true);
   }
 
   function closeModal() {
     setIsOpen(false);
+  }
+  function onChangeHandler(event: ChangeEvent<HTMLInputElement>) {
+    const { value, name } = event.target;
+    setProduct({
+      ...product,
+      [name]: value,
+    });
   }
   const renderFormInputList = formInputList.map((input) => (
     <div className="flex flex-col">
@@ -21,13 +43,17 @@ const App = () => {
       >
         {input.label}
       </label>
-      <Input type={input.type} id={input.id} name={input.name} />
+      <Input
+        type={input.type}
+        id={input.id}
+        name={input.name}
+        // its wrong now
+        //value={product[""]}
+        onChange={onChangeHandler}
+      />
     </div>
   ));
   return (
-    //<--STATE-->
-    //<--HANDLER-->
-
     <main className=" container mx-auto">
       <Button
         className="bg-indigo-700 hover:bg-indigo-800 "
