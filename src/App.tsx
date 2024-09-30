@@ -47,8 +47,7 @@ const App = () => {
         type={input.type}
         id={input.id}
         name={input.name}
-        // its wrong now
-        //value={product[""]}
+        value={product[input.name]}
         onChange={onChangeHandler}
       />
     </div>
